@@ -1,12 +1,5 @@
 #include<stdio.h>
 #include<string.h>
-
-void fordelay(int j)
-{   int i,k;
-    for(i=0;i<j;i++)
-         k=i;
-}
-
 struct {
     char user[15];
     char name[50];
@@ -18,27 +11,23 @@ struct {
     char sq[15];
 } add[100],check;
 
-void regis(){
+int regis(int rtn){
     char* b[8]={"(1) Enter Username : ","(2) Enter Name : ","(3) Enter DOB(dd/mm/yy) : ","(4) Enter Today's Date(dd/mm/yy) : ","(5) Enter New A/C No. : ","(6) Enter Password : ","(7) Enter Mobile no. :","(8) Enter security Que(Pet Name) : "};
-   int i=0;
-FILE *fp,*fp2;
+   int i;
+FILE *fp;
 
 fp=fopen("record.dat","a+");
-fp2=fopen("record.dat","r");
 
 username:
 printf("\n\n%s",b[0]);
-scanf("%s",check.user);
-printf("%s",check.user);
-
-while(fscanf(fp2,"%s %s %s %s %s %s %s %s\n",add[i].user,add[i].name,add[i].dob,add[i].date,add[i].ac,add[i].pass,add[i].no,add[i].sq)!=EOF){
-
-    if(check.user==add[i].user){
+    scanf("%s",check.user);
+        i=0;
+while(fscanf(fp,"%s %s %s %s %s %s %s %s\n",add[i].user,add[i].name,add[i].dob,add[i].date,add[i].ac,add[i].pass,add[i].no,add[i].sq)!=EOF){
+    if(strcmpi(add[i].user,check.user)==0){
         printf("\nUsername Already Taken!!");
         goto username;
     }
     i++;
-    printf("%s",add[i].user);
 }
     printf("\n%s",b[1]);
         scanf("%s",add[i].name);
@@ -59,12 +48,7 @@ while(fscanf(fp2,"%s %s %s %s %s %s %s %s\n",add[i].user,add[i].name,add[i].dob,
 
     fclose(fp);
 
-    printf("\nLoading");
-    for(int i=0;i<4;i++){
-        fordelay(100000000);
-        printf(".");
-       }
-
     printf("\nRegistered Successfully!");
-    printf("\n%d",i);
+    rtn=1;
+    return rtn;
 }
