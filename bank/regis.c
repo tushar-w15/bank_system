@@ -7,12 +7,13 @@ struct {
     char date[15];
     char pass[15];
     char ac[10];
+    char bal[10];
     char no[11];
     char sq[15];
 } add[100],check;
 
 int regis(int rtn){
-    char* b[8]={"(1) Enter Username : ","(2) Enter Name : ","(3) Enter DOB(dd/mm/yy) : ","(4) Enter Today's Date(dd/mm/yy) : ","(5) Enter New A/C No. : ","(6) Enter Password : ","(7) Enter Mobile no. :","(8) Enter security Que(Pet Name) : "};
+    char* b[9]={"(1) Enter Username : ","(2) Enter Name : ","(3) Enter DOB(dd/mm/yy) : ","(4) Enter Today's Date(dd/mm/yy) : ","(5) Enter New A/C No. : ","(6) Enter how much money you want to deposit :$","(7) Enter Password : ","(8) Enter Mobile no. :","(9) Enter security Que(Pet Name) : "};
    int i;
 FILE *fp;
 
@@ -22,7 +23,7 @@ username:
 printf("\n\n%s",b[0]);
     scanf("%s",check.user);
         i=0;
-while(fscanf(fp,"%s %s %s %s %s %s %s %s\n",add[i].user,add[i].name,add[i].dob,add[i].date,add[i].ac,add[i].pass,add[i].no,add[i].sq)!=EOF){
+while(fscanf(fp,"%s %s %s %s %s %s %s %s %s\n",add[i].user,add[i].name,add[i].dob,add[i].date,add[i].ac,add[i].bal,add[i].pass,add[i].no,add[i].sq)!=EOF){
     if(strcmpi(add[i].user,check.user)==0){
         printf("\nUsername Already Taken!!");
         goto username;
@@ -38,14 +39,15 @@ while(fscanf(fp,"%s %s %s %s %s %s %s %s\n",add[i].user,add[i].name,add[i].dob,a
     printf("\n%s",b[4]);
         scanf("%s",add[i].ac);
     printf("\n%s",b[5]);
-        scanf("%s",add[i].pass);
+        scanf("%s",add[i].bal);
     printf("\n%s",b[6]);
-        scanf("%s",add[i].no);
+        scanf("%s",add[i].pass);
     printf("\n%s",b[7]);
+        scanf("%s",add[i].no);
+    printf("\n%s",b[8]);
         scanf("%s",add[i].sq);
 
-        fprintf(fp,"%s %s %s %s %s %s %s %s\n",check.user,add[i].name,add[i].dob,add[i].date,add[i].ac,add[i].pass,add[i].no,add[i].sq);
-
+        fprintf(fp,"%s %s %s %s %s %s %s %s %s\n",check.user,add[i].name,add[i].dob,add[i].date,add[i].ac,add[i].bal,add[i].pass,add[i].no,add[i].sq);
     fclose(fp);
 
     printf("\nRegistered Successfully!");
