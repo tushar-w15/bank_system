@@ -18,24 +18,33 @@ int forPass(int rtn){
     FILE *ptr;
         ptr=fopen("record.dat","r");
     retry:
-    printf("\nEnter Security Que (Pet Name) : ");
-    scanf("%s",check2.sq);
+    printf("\nEnter Username : ");
+    scanf("%s",check2.user);
         i=0;
     
-while(fscanf(ptr,"%s %s %s %s %s %s %s %s %s\n",add[i].user,add[i].name,add[i].dob,add[i].date,add[i].ac,add[i].bal,add[i].pass,add[i].no,add[i].sq)!=EOF){
-    if(strcmpi(add2[i].sq,check2.sq)==0){
+while(fscanf(ptr,"%s %s %s %s %s %s %s %s %s\n",add2[i].user,add2[i].name,add2[i].dob,add2[i].date,add2[i].ac,add2[i].bal,add2[i].pass,add2[i].no,add2[i].sq)!=EOF){
+    if(strcmpi(add2[i].user,check2.user)==0){
         goto success;
         break;
     }
     i++;
 }
- printf("\n\n\tPet doesnot Exist!!\n\tTry Again...");
+ printf("\n\n\tUsername doesnot Exist!!\n\tTry Again...");
         fclose(ptr);
         rtn=0;
         return rtn;
 
-success:        
+success:
+printf("\n\tEnter Security Que (Pet Name) : ");
+scanf("%s",check2.sq);
+
+if(strcmpi(add2[i].sq,check2.sq)==0){
 printf("Your Password Is :%10s\n",add2[i].pass);
     rtn=1;
     return rtn;
+}
+else{
+    printf("\n\tSecurity quetion doesnot match!!");
+    goto success;
+}
 }

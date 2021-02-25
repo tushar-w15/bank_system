@@ -9,7 +9,8 @@
 #include "for_pass.c"
 
 int main(){
-   char choice,choice2;
+   char choice;
+   int reader=0;
     int rtn1,rtn2,rtn3;
 
    choice=step1(choice);
@@ -42,10 +43,6 @@ int main(){
         }
        break;
    }
-
-
-  scanf(" %c",&choice2);
-  printf("%c",choice2);
 
     return 0;
 }

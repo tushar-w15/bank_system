@@ -23,28 +23,28 @@ int login(int rtn){
     printf("\n\n\t%s",a[0]);
         scanf("%s",check1.user);
             i=0;
-while(fscanf(ptr,"%s %s %s %s %s %s %s %s %s\n",add[i].user,add[i].name,add[i].dob,add[i].date,add[i].ac,add[i].bal,add[i].pass,add[i].no,add[i].sq)!=EOF){
+while(fscanf(ptr,"%s %s %s %s %s %s %s %s %s\n",add1[i].user,add1[i].name,add1[i].dob,add1[i].date,add1[i].ac,add1[i].bal,add1[i].pass,add1[i].no,add1[i].sq)!=EOF){
 
     if(strcmpi(add1[i].user,check1.user)==0){
+        goto password;
         break;
-    }
-    else if(EOF){
-        printf("\n\n\tUser Doesnot Exist!!\n\tTry Again...");
-        fclose(ptr);
-        rtn=0;
-        return rtn;
     }
     i++;
 }
+ printf("\n\n\tUser Doesnot Exist!!\n\tTry Again...");
+        fclose(ptr);
+        rtn=0;
+        return rtn;
+
 password:
-    printf("\n\n\t%s",a[1]);
+    printf("\n\t%s",a[1]);
         scanf("%s",check1.pass);
 
 if(strcmpi(add1[i].pass,check1.pass)==0){
     printf("\n\n\tPassword Matched successfully");
     fclose(ptr);
     rtn=1;
-    return rtn;
+    return (rtn);
 }
 else{
     printf("\n\tPassword Doesnot Match\n\n\tTry Again");

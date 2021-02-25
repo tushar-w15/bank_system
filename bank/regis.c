@@ -52,5 +52,5 @@ while(fscanf(fp,"%s %s %s %s %s %s %s %s %s\n",add[i].user,add[i].name,add[i].do
 
     printf("\nRegistered Successfully!");
     rtn=1;
-    return rtn;
+    return (rtn);
 }
