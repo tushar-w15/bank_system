@@ -7,7 +7,7 @@ struct {
     char date[15];
     char pass[15];
     char ac[10];
-    char bal[10];
+    int bal;
     char no[11];
     char sq[15];
 } add[100],check;
@@ -23,7 +23,7 @@ username:
 printf("\n\n%s",b[0]);
     scanf("%s",check.user);
         i=0;
-while(fscanf(fp,"%s %s %s %s %s %s %s %s %s\n",add[i].user,add[i].name,add[i].dob,add[i].date,add[i].ac,add[i].bal,add[i].pass,add[i].no,add[i].sq)!=EOF){
+while(fscanf(fp,"%s %s %s %s %s %d %s %s %s\n",add[i].user,add[i].name,add[i].dob,add[i].date,add[i].ac,&add[i].bal,add[i].pass,add[i].no,add[i].sq)!=EOF){
     if(strcmpi(add[i].user,check.user)==0){
         printf("\nUsername Already Taken!!");
         goto username;
@@ -39,7 +39,7 @@ while(fscanf(fp,"%s %s %s %s %s %s %s %s %s\n",add[i].user,add[i].name,add[i].do
     printf("\n%s",b[4]);
         scanf("%s",add[i].ac);
     printf("\n%s",b[5]);
-        scanf("%s",add[i].bal);
+        scanf("%d",&add[i].bal);
     printf("\n%s",b[6]);
         scanf("%s",add[i].pass);
     printf("\n%s",b[7]);
@@ -47,7 +47,7 @@ while(fscanf(fp,"%s %s %s %s %s %s %s %s %s\n",add[i].user,add[i].name,add[i].do
     printf("\n%s",b[8]);
         scanf("%s",add[i].sq);
 
-        fprintf(fp,"%s %s %s %s %s %s %s %s %s\n",check.user,add[i].name,add[i].dob,add[i].date,add[i].ac,add[i].bal,add[i].pass,add[i].no,add[i].sq);
+        fprintf(fp,"%s %s %s %s %s %d %s %s %s\n",check.user,add[i].name,add[i].dob,add[i].date,add[i].ac,add[i].bal,add[i].pass,add[i].no,add[i].sq);
     fclose(fp);
 
     printf("\nRegistered Successfully!");

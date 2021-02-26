@@ -8,7 +8,7 @@ struct {
     char date[15];
     char pass[15];
     char ac[10];
-    char bal[10];
+    int bal;
     char no[11];
     char sq[15];
 } add2[100],check2;
@@ -22,7 +22,7 @@ int forPass(int rtn){
     scanf("%s",check2.user);
         i=0;
     
-while(fscanf(ptr,"%s %s %s %s %s %s %s %s %s\n",add2[i].user,add2[i].name,add2[i].dob,add2[i].date,add2[i].ac,add2[i].bal,add2[i].pass,add2[i].no,add2[i].sq)!=EOF){
+while(fscanf(ptr,"%s %s %s %s %s %d %s %s %s\n",add2[i].user,add2[i].name,add2[i].dob,add2[i].date,add2[i].ac,&add2[i].bal,add2[i].pass,add2[i].no,add2[i].sq)!=EOF){
     if(strcmpi(add2[i].user,check2.user)==0){
         goto success;
         break;
