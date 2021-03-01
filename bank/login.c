@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<String.h>
+int result=0;
 
 struct {
      char user[15];
@@ -13,7 +14,7 @@ struct {
     char sq[15];
 } add1[100],check1;
 
-int login(int rtn){
+int login(int* ptr4){
     char* a[2]={"Enter Username : ","Enter Password : "};
         int i;
     FILE* ptr;
@@ -33,8 +34,8 @@ while(fscanf(ptr,"%s %s %s %s %s %d %s %s %s\n",add1[i].user,add1[i].name,add1[i
 }
  printf("\n\n\tUser Doesnot Exist!!\n\tTry Again...");
         fclose(ptr);
-        rtn=0;
-        return rtn;
+        
+        return 0;
 
 password:
     printf("\n\t%s",a[1]);
@@ -43,12 +44,13 @@ password:
 if(strcmpi(add1[i].pass,check1.pass)==0){
     printf("\n\n\tPassword Matched successfully");
     fclose(ptr);
-    rtn=1;
-    return (rtn);
+    *ptr4=i;
+    result=1;
+    return 1;
 }
 else{
     printf("\n\tPassword Doesnot Match\n\n\tTry Again");
         fclose(ptr);
-        login(rtn);
+        login(ptr4);
 }
 }

@@ -8,24 +8,24 @@
 #include "login.c"
 #include "for_pass.c"
 
+
 int main(){
    char choice;
    int reader=0;
-    int rtn1,rtn2,rtn3;
-
+    int rtn1,rtn2,rtn3,j1;
    choice=step1(choice);
 
    switch(choice){
        case '1':rtn1=regis(rtn1);
        if(rtn1==1){
-           mainMenu();
+           mainMenu(&j1);
         }
        break;
 
        case '2':retry:
-       rtn2=login(rtn2);
+       rtn2=login(&j1);
         if(rtn2==1){
-            mainMenu();
+            mainMenu(&j1);
         }
         else{
             goto retry;
