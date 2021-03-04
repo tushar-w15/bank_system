@@ -10,9 +10,9 @@
 
 
 int main(){
-   char choice;
-   int reader=0;
-    int rtn1,rtn2,rtn3,j1;
+        char choice;
+        int reader=0;
+        int rtn1,rtn2,rtn3,j1;
    choice=step1(choice);
 
    switch(choice){
@@ -42,6 +42,8 @@ int main(){
             goto tryag;
         }
        break;
+       default :printf("\n\n\tError choice\n\n");
+       main();
    }
 
     return 0;

@@ -43,14 +43,14 @@ void mainMenu(int* ptr3){
             break;
         
         case 3:printf("\n\n\tcoming soon");
-                mainMenu(&j);
+            mainMenu(&j);
             break;
 
         case 4:exit(1);
             break;
 
         default:printf("\n\n\tError Choice!!\n\nTry again");
-                mainMenu(&j);
+            mainMenu(&j);
     }
 }
 
@@ -126,7 +126,8 @@ void atmwid(){
                     printf("\n\n\tEnter how much money you want to withdraw :$");
                     scanf("%d",&check3.bal);
                     if(check3.bal>add3[i].bal){
-                        printf("\n\n\tYou dont have enough money to withdraw!!");
+                        printf("\n\n\tYou dont have enough money to withdraw!!\n\tTransaction failed!!");
+                        printf("\n\n\tYour balance is => %d",add3[i].bal);
                         fclose(ptr1);
                         fclose(ptr2);
                         remove("new.dat");
