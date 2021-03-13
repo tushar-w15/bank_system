@@ -3,13 +3,18 @@
 #include<stdlib.h>
 
 int main(){
-    char s[20];
 
-    scanf("%s",s);
+    int i,num,result=0;
+        scanf("%d",&i);
+    char s[i];
+        scanf("%s",s);
 
-    int num = atoi(s);
-
-    printf("%d",num);
+        for(int j=0;j<i;j++){
+            num=s[j];
+            num-=48;
+            result=(result*10)+num;
+        }
+    printf("%d",result);
 
     return 0;
 }

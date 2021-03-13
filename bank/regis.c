@@ -12,12 +12,15 @@ struct {
     char sq[15];
 } add[100],check;
 
+char trans1;
+
 int regis(int rtn){
     char* b[9]={"(1) Enter Username : ","(2) Enter Name : ","(3) Enter DOB(dd/mm/yy) : ","(4) Enter Today's Date(dd/mm/yy) : ","(5) Enter New A/C No. : ","(6) Enter how much money you want to deposit :$","(7) Enter Password : ","(8) Enter Mobile no. :","(9) Enter security Que(Pet Name) : "};
    int i;
-FILE *fp;
+FILE *fp,*tr;
 
 fp=fopen("record.dat","a+");
+tr=fopen("transaction.dat","a+");
 
 username:
 printf("\n\n%s",b[0]);
@@ -49,6 +52,15 @@ while(fscanf(fp,"%s %s %s %s %s %d %s %s %s\n",add[i].user,add[i].name,add[i].do
 
         fprintf(fp,"%s %s %s %s %s %d %s %s %s\n",check.user,add[i].name,add[i].dob,add[i].date,add[i].ac,add[i].bal,add[i].pass,add[i].no,add[i].sq);
     fclose(fp);
+
+    while(1){
+        trans1=fgetc(tr);
+            if(trans1==EOF){
+                fprintf(tr,"+%d\n",add[i].bal);
+                break;
+            }
+    }
+    fclose(tr);
 
     printf("\nRegistered Successfully!");
     rtn=1;

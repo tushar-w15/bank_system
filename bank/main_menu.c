@@ -8,16 +8,19 @@ struct {
     char date[15];
     char pass[15];
     char ac[10];
-    int bal;
     char no[11];
     char sq[15];
+    int bal;
 } add3[100],check3;
+
+char trans[100][1000];
 
 void atm();
 void atmdep();
 void atmwid();
 void atmbal();
 void info();
+void transac();
 
 int j;
 
@@ -42,8 +45,7 @@ void mainMenu(int* ptr3){
         case 2:info();
             break;
         
-        case 3:printf("\n\n\tcoming soon");
-            mainMenu(&j);
+        case 3:transac();
             break;
 
         case 4:exit(1);
@@ -77,17 +79,19 @@ switch(choice3){
     break;
 
     default:printf("\n\tError choice");
+        atm();
 }
 
 }
 void atmdep(){
-    FILE* ptr1,*ptr2;
+    FILE* ptr1,*ptr2,*tr,*tr1;
     char another='y';
     do{
         ptr1=fopen("record.dat","r");
         ptr2=fopen("new.dat","w");
-        int i;
-        i=0;
+        tr=fopen("transaction.dat","r");
+        tr1=fopen("new1.dat","w");
+        int i=0,ind=0,ind1=0;
             while(fscanf(ptr1,"%s %s %s %s %s %d %s %s %s\n",add3[i].user,add3[i].name,add3[i].dob,add3[i].date,add3[i].ac,&add3[i].bal,add3[i].pass,add3[i].no,add3[i].sq)!=EOF){
                 if(i==j){
                     printf("\n\tEnter how much money you want to deposit :$");
@@ -101,26 +105,53 @@ void atmdep(){
                 }
             i++;
             }
+        while(1){
+            trans[ind][ind1]=fgetc(tr);
+                if(trans[ind][ind1]==EOF){
+                    /*if(ind==j){
+                        fprintf(tr1," +%d",check3.bal);
+                    }*/
+                    break;
+                }
+                if(ind==j){
+                    if(trans[ind][ind1]=='\n'){
+                        fprintf(tr1," +%d",check3.bal);
+                    }
+                }
+                if(trans[ind][ind1]=='\n'){
+                    ind++;
+                    ind1=0;
+                    fprintf(tr1,"\n");
+                    continue;
+                }
+            fprintf(tr1,"%c",trans[ind][ind1]);
+            ind1++;
+        }
         
     printf("\n\n\tAdded Successfully!");
     printf("\n\tYour balance is => $%d",add3[j].bal);
     printf("\n\n\tWant another deposit transaction(y/n) : ");
         scanf(" %c",&another);
+        fclose(tr);
+        fclose(tr1);
         fclose(ptr1);
         fclose(ptr2);
+        remove("transaction.dat");
+        rename("new1.dat","transaction.dat");
         remove("record.dat");
         rename("new.dat","record.dat");
 }while(another=='y');
 mainMenu(&j);
 }
 void atmwid(){
-    FILE* ptr1,*ptr2;
+    FILE* ptr1,*ptr2,*tr,*tr1;
     char another='y';
     do{
-         ptr1=fopen("record.dat","r");
+        ptr1=fopen("record.dat","r");
         ptr2=fopen("new.dat","w");
-        int i;
-        i=0;
+        tr=fopen("transaction.dat","r");
+        tr1=fopen("new1.dat","w");
+        int i=0,ind=0,ind1=0;
             while(fscanf(ptr1,"%s %s %s %s %s %d %s %s %s\n",add3[i].user,add3[i].name,add3[i].dob,add3[i].date,add3[i].ac,&add3[i].bal,add3[i].pass,add3[i].no,add3[i].sq)!=EOF){
                 if(i==j){
                     printf("\n\n\tEnter how much money you want to withdraw :$");
@@ -142,12 +173,38 @@ void atmwid(){
                 }
             i++;
             }
+        while(1){
+            trans[ind][ind1]=fgetc(tr);
+                if(trans[ind][ind1]==EOF){
+                    /*if(ind==j){
+                        fprintf(tr1," +%d",check3.bal);
+                    }*/
+                    break;
+                }
+                if(ind==j){
+                    if(trans[ind][ind1]=='\n'){
+                        fprintf(tr1," -%d",check3.bal);
+                    }
+                }
+                if(trans[ind][ind1]=='\n'){
+                    ind++;
+                    ind1=0;
+                    fprintf(tr1,"\n");
+                    continue;
+                }
+            fprintf(tr1,"%c",trans[ind][ind1]);
+            ind1++;
+        }
     printf("\n\n\tWithdrawn Successfully!");
     printf("\n\tYour balance is => $%d",add3[j].bal);
     printf("\n\n\tWant another deposit transaction(y/n) : ");
         scanf(" %c",&another);
+        fclose(tr);
+        fclose(tr1);
         fclose(ptr1);
         fclose(ptr2);
+        remove("transaction.dat");
+        rename("new1.dat","transaction.dat");
         remove("record.dat");
         rename("new.dat","record.dat");
 }while(another=='y');
@@ -187,4 +244,40 @@ void info(){
     printf("\n\n\tEnter 0 to continue ");
     scanf("%d",&m);
 mainMenu(&j);
+}
+
+void transac(){
+    FILE* tr;
+    int ind=0,ind1=0,ind2=0;
+    char cont;
+        tr=fopen("transaction.dat","r");
+        printf("\n\n\tDebit\t\tCredit\n");
+    while(1){
+        trans[ind][ind1]=fgetc(tr);
+        if(trans[ind][ind1]==EOF){
+            fclose(tr);
+            printf("\n\n\tEnter any character to continue : ");
+            scanf(" %c",&cont);
+            mainMenu(&j);
+        }
+        if(trans[ind][ind1]=='\n'){
+            ind++;
+            ind1=0;
+        }
+        if(ind==j){
+            switch(trans[ind][ind1]){
+                case '+':printf("[%d]\t%c",ind2+=1,trans[ind][ind1]);
+                break;
+
+                case '-':printf("[%d]\t\t\t%c",ind2+=1,trans[ind][ind1]);
+                break;
+
+                case ' ':printf("\n");
+                break;
+
+                default:printf("%c",trans[ind][ind1]);
+            }
+        }
+    ind1++;
+    }
 }
