@@ -56,7 +56,7 @@ while(fscanf(fp,"%s %s %s %s %s %d %s %s %s\n",add[i].user,add[i].name,add[i].do
     while(1){
         trans1=fgetc(tr);
             if(trans1==EOF){
-                fprintf(tr,"+%d\n",add[i].bal);
+                fprintf(tr,"+%d $%d\n",add[i].bal,add[i].bal);
                 break;
             }
     }

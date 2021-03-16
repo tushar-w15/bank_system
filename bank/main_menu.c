@@ -115,7 +115,7 @@ void atmdep(){
                 }
                 if(ind==j){
                     if(trans[ind][ind1]=='\n'){
-                        fprintf(tr1," +%d",check3.bal);
+                        fprintf(tr1," +%d $%d",check3.bal,add3[j].bal);
                     }
                 }
                 if(trans[ind][ind1]=='\n'){
@@ -177,13 +177,13 @@ void atmwid(){
             trans[ind][ind1]=fgetc(tr);
                 if(trans[ind][ind1]==EOF){
                     /*if(ind==j){
-                        fprintf(tr1," +%d",check3.bal);
+                        fprintf(tr1," +%d ",check3.bal);
                     }*/
                     break;
                 }
                 if(ind==j){
                     if(trans[ind][ind1]=='\n'){
-                        fprintf(tr1," -%d",check3.bal);
+                        fprintf(tr1," -%d $%d",check3.bal,add3[j].bal);
                     }
                 }
                 if(trans[ind][ind1]=='\n'){
@@ -249,14 +249,15 @@ mainMenu(&j);
 void transac(){
     FILE* tr;
     int ind=0,ind1=0,ind2=0;
+    char* type1[10],type2[10];
     char cont;
         tr=fopen("transaction.dat","r");
-        printf("\n\n\tDebit\t\tCredit\n");
+        printf("\n\n\tDebit\t\tCredit\t\tBalance\n");
     while(1){
         trans[ind][ind1]=fgetc(tr);
         if(trans[ind][ind1]==EOF){
             fclose(tr);
-            printf("\n\n\tEnter any character to continue : ");
+            printf("\n\n\tEnter 0 to continue : ");
             scanf(" %c",&cont);
             mainMenu(&j);
         }
@@ -275,7 +276,11 @@ void transac(){
                 case ' ':printf("\n");
                 break;
 
+                case '$':printf("\t_________________________________%c",trans[ind][ind1]);
+                break;
+
                 default:printf("%c",trans[ind][ind1]);
+
             }
         }
     ind1++;

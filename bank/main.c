@@ -10,9 +10,10 @@
 
 
 int main(){
-        char choice;
+        char choice,conti;
         int reader=0;
         int rtn1,rtn2,rtn3,j1;
+
    choice=step1(choice);
 
    switch(choice){
@@ -35,13 +36,14 @@ int main(){
        case '3':tryag:
        rtn3=forPass(rtn3);
         if(rtn3==1){
-            printf("\t thankyou");
+            printf("\n\t ThankYou\n");
             exit(1);
         }
         else{
             goto tryag;
         }
        break;
+       
        default :printf("\n\n\tError choice\n\n");
        main();
    }
